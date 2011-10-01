@@ -17,4 +17,15 @@ exports.newDoclet = function(e) {
             .replace( /&lt;/g, "<" )
             .replace( /&gt;/g, ">" );
     }
+    if (e.doclet.params) {
+        for (i in e.doclet.params) {
+            e.doclet.params[i].description = mdParser.toHTML(e.doclet.params[i].description)
+              .replace( /^<p>/g, "" ) // remove initial <p>
+              .replace( /<\/p>$/g, "" ) // remove trailing </p>
+              .replace( /&amp;/g, "&" ) // because markdown escapes these
+              .replace( /&lt;/g, "<" )
+              .replace( /&gt;/g, ">" );
+ 
+        }
+    }
 };
